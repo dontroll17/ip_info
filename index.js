@@ -20,16 +20,15 @@ const get_ip = async (ip = '127.0.0.1') => {
             "#Lon": response.data.lon
         }
         const ctx = Object.entries(data).join('\n').replace(/,/g, ": ");
-        console.log(ctx)
+        return ctx;
     }catch(e) {
         console.error(e);
     }
 }
 
-rl.question('Enter ip: ', (ip) => {
-    get_ip(ip).then(x => {
-        return x;
-    });
+rl.question('Enter ip: ', async (ip) => {
+    const data = await get_ip(ip)
+    console.log(data);
     rl.close();
 });
 
